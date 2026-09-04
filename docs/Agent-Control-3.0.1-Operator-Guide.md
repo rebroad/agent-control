@@ -28,7 +28,7 @@ Use Node.js 20+, npm, Git and Bash. Install Orca, SSH, Android/Termux or model s
 ## Install
 
 ```bash
-git clone https://github.com/lozknowles/agent-control.git
+git clone <repository-url>
 cd agent-control
 npm install
 mkdir -p .agent-control
@@ -39,7 +39,7 @@ npm run check
 Windows PowerShell equivalent:
 
 ```powershell
-git clone https://github.com/lozknowles/agent-control.git
+git clone <repository-url>
 Set-Location agent-control
 npm install
 New-Item -ItemType Directory -Force .agent-control
@@ -56,6 +56,18 @@ The default configuration path is `.agent-control/config.json`. Override it with
 Resources combine a stable ID, platform, transport and capabilities. Providers describe the API/CLI capability and optional qualification model. Services describe an explicit health URL and optional start recipe. Lanes describe ID, name, directory, priority and mode.
 
 The example file illustrates local, SSH and Android resources, an alternate provider port, an optional managed service and two lanes. Replace every example endpoint. Empty collections are valid.
+
+See [Integrations and credentials](integrations-and-credentials.md) before configuring an LLM, Codex, ChatKit, Orca or Android resource. In particular, `chatgpt-window` is not included in v3.0.1; a Responses provider URL must be served by an external process.
+
+The first configuration file is only an explicit safety boundary. It is not a
+discovery database: providers, resources, services and lanes become meaningful
+only when the operator adds real endpoints, transports, capabilities and
+commands. The current TUI probes configured integrations and maintains lane
+state, but does not submit ordinary lane prompts to an LLM.
+
+Use [Concepts and terms](concepts.md) for the plain-language meaning of lane,
+contract, baton, lease, resource, provider, harness, and scheduler before
+operating a multi-resource setup.
 
 ## Start
 
@@ -166,9 +178,18 @@ Takeover always wins. It increments the Agent Control ownership generation, reje
 
 Configure Orca as the selected execution provider only after local qualification. Agent Control calls the narrow interface for start, status, reconnect, input, pause, resume, cancel, output, diff and cleanup. Keep the built-in executor as fallback through 3.0 qualification. Do not expose Orca-native scheduling or ownership controls directly to lanes.
 
+This repository does not ship the Orca runtime, a service definition, or an Orca credential. See [Integrations and credentials](integrations-and-credentials.md) for the boundary.
+
 ## Shared context and consensus
 
 Attach existing read-only shared URLs as context sources. Never create or broaden a public share without explicit approval. Routing starts with a baton, adds diff/tests when needed, loads selected shared-thread sections only when valuable, and escalates disputes to independent agents plus a judge. Missing/expired context never blocks Git/baton recovery.
+
+Batons are compact persisted lane records, not automatically generated
+cross-model summaries. The library has handoff/clone operations, but the TUI
+does not currently expose them, and no code negotiates a destination model's
+context window or rewrites Codex sub-agents. The reusable scheduler can allocate
+explicit work items by capability and load, but it is not yet wired as a
+general multi-LLM prompt router.
 
 ## Android
 
@@ -178,7 +199,7 @@ Add a configured Android resource, supply its existing credential in the named e
 npm run provision:android
 ```
 
-The mission pauses for explicit administrator approval if ADB installation is required, explicit human wireless-pairing approval, and explicit reboot-test approval. The node is loopback-bound by default and accepts only the read-only Android log job.
+The mission pauses for explicit administrator approval if ADB installation is required, explicit human wireless-pairing approval, and explicit reboot-test approval. The node is loopback-bound by default and accepts only the read-only Android log job. Provisioning does not install an LLM or log the operator into Codex/OpenAI; it installs and verifies Android transport and boot prerequisites. See [Integrations and credentials](integrations-and-credentials.md) for the ordered operations and token boundary.
 
 ## Stop and recover
 

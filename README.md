@@ -110,7 +110,7 @@ Model Intelligence now reports real source coverage, initial versus follow-up ob
 - [Android / fresh Termux prerequisites](android/README.md#fresh-termux-prerequisites) (separate platform guide)
 - [Installation and troubleshooting](docs/installation-first-run.md#troubleshooting)
 - [Safe existing-install upgrade](docs/upgrade-4.8.md)
-- [Architecture](docs/architecture-v2-agnostic.md)
+- [Architecture](docs/architecture-v2.md)
 - [Security](SECURITY.md) and [contributing](CONTRIBUTING.md)
 - [Release notes](docs/release-notes-4.8.1.md)
 - [Accepted RC assessment and evidence](docs/release-candidate-4.6.md)

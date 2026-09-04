@@ -12,7 +12,7 @@
 - [Nested Execution Environments](nested-execution-environments.md)
 - [Native runtime benchmarking](running-your-first-benchmark.md)
 - [Speculative decoding qualification](speculative-decoding-qualification.md)
-- [Architecture](architecture-v2-agnostic.md)
+- [Architecture](architecture-v2.md)
 - [Job Library](https://github.com/lozknowles/agent-control-jobs)
 - [Usage and Energy physical qualification](usage-energy-physical-closure-4.6.md)
 - [Security](../SECURITY.md)

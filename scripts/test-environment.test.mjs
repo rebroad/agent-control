@@ -26,6 +26,19 @@ test('published test command isolates default Agent Control state', () => {
   assert.equal(fs.existsSync(path.dirname(isolated.state)), false);
 });
 
+test('published test command bounds Git discovery at the temporary root', () => {
+  const environment = {...process.env};
+  delete environment.GIT_CEILING_DIRECTORIES;
+  const child = spawnSync(process.execPath, [
+    '--import',
+    path.join(repositoryRoot, 'scripts/test-environment.mjs'),
+    '--eval',
+    "process.stdout.write(process.env.GIT_CEILING_DIRECTORIES)",
+  ], {cwd: repositoryRoot, env: environment, encoding: 'utf8'});
+  assert.equal(child.status, 0, child.stderr);
+  assert.equal(child.stdout, os.tmpdir());
+});
+
 test('explicit test state remains operator-selected and is not removed', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'agent-control-explicit-test-'));
   try {
