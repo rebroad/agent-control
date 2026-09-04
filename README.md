@@ -269,7 +269,7 @@ Providers and external services that require API keys use `auth.env`, `credentia
 
 For a managed Linux resource, `managedNode` adds polling/heartbeat policy, declarative protected-workload detectors, approved services, BUSY capability fences and an optional operator-reviewed runtime update target. Hardware, package tools, filesystems, optical devices, secure-overlay state and operational capabilities are discovered rather than assumed. Real endpoints and workload identifiers remain operator configuration, never core defaults.
 
-See [`config/agent-control.example.json`](config/agent-control.example.json), [`ARCHITECTURE.md`](ARCHITECTURE.md), and [`docs/concepts.md`](docs/concepts.md). The older [`docs/architecture-v2-agnostic.md`](docs/architecture-v2-agnostic.md) remains a configuration-neutrality appendix.
+See [`config/agent-control.example.json`](config/agent-control.example.json), [`ARCHITECTURE.md`](ARCHITECTURE.md), and [`docs/concepts.md`](docs/concepts.md). The older [`docs/architecture-v2.md`](docs/architecture-v2.md) remains a configuration-neutrality appendix.
 
 ## Adaptive harness
 
